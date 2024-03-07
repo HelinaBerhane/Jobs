@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
 
-from dates import datetime_now
+from backend.dates import datetime_now
 from pydantic import BaseModel, Field
 
 
