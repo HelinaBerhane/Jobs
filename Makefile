@@ -35,7 +35,7 @@ pretty:
 
 # run tests
 test:
-	.venv/bin/pytest
+	PYTHONPATH=$(PWD) .venv/bin/python -m pytest -v
 
 # clean up the code
 clean: check_fix pretty check_types test openapi
