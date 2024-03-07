@@ -1,0 +1,7 @@
+.venv/*
+__pycache__
+.parcel-cache
+openapi.json
+backend/jobs.db
+events.log
+api-client
