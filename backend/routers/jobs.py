@@ -38,7 +38,7 @@ async def get_job(
 @router.get("")
 @handle_http_exceptions
 async def get_jobs() -> list[Job]:
-    logging.debug(f"Getting All Jobs")
+    logging.debug("Getting All Jobs")
     return jobs_db.get_jobs()
 
 
