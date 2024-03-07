@@ -3,8 +3,8 @@ from contextlib import closing
 from datetime import datetime, timezone
 from uuid import UUID
 
-from exceptions import ResourceNotFoundException
-from models import Job
+from backend.exceptions import ResourceNotFoundException
+from backend.models import Job
 
 
 def read_date(date_str: str) -> datetime:
