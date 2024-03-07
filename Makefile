@@ -1,4 +1,3 @@
-
 # setup local python environment
 venv:
 	if [ ! -d "$(DIR1)" ]; then \
@@ -20,19 +19,19 @@ openapi:
 
 # find all type issues
 check_types:
-    .venv/bin/mypy .
+	.venv/bin/mypy .
 
 # find all syntax issues
 check:
-    .venv/bin/ruff check
+	.venv/bin/ruff check
 
 # fix all simple to fix syntax issues
 check_fix:
-    .venv/bin/ruff check --fix
+	.venv/bin/ruff check --fix
 
 # fix all format issues
 pretty:
-    .venv/bin/ruff format
+	.venv/bin/ruff format
 
 # run tests
 test:
