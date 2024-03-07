@@ -47,3 +47,12 @@ run:
 run_docker:
 	docker compose build
 	docker compose up
+
+# This is temporary until we have a proper CI/CD pipeline
+# TODO(luk707): Add a proper CI/CD pipeline
+backend_container:
+	docker build -t lukeharris954/jobs-backend -f backend.Dockerfile .
+
+# TODO(luk707): Replace with github actions
+push_image:
+	docker push lukeharris954/jobs-backend
