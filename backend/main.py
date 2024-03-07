@@ -3,6 +3,9 @@ import os
 
 import uvicorn
 
+from backend.app import app
+
+
 if __name__ == "__main__":
     # setup logs
     logging.basicConfig(
@@ -16,7 +19,7 @@ if __name__ == "__main__":
 
     # run api server
     config = uvicorn.Config(
-        "app:app",
+        app,
         host=os.getenv("HOST", default="0.0.0.0"),
         port=int(os.getenv("PORT", default="8000")),
         log_level="info",

@@ -42,4 +42,4 @@ clean: check_fix pretty check_types test openapi
 
 # run the backend API
 run:
-	.venv/bin/python backend/main.py
+	PYTHONPATH=$(PWD) .venv/bin/python backend/main.py
