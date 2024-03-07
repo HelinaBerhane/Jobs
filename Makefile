@@ -43,3 +43,7 @@ clean: check_fix pretty check_types test openapi
 # run the backend API
 run:
 	PYTHONPATH=$(PWD) .venv/bin/python backend/main.py
+
+run_docker:
+	docker compose build
+	docker compose up
