@@ -8,7 +8,7 @@ def dict_factory(cursor: Cursor, row: Row) -> Dict[str, Any]:
 
     Usage:
         ```python
-        cursor.row_factory = dict_factory
+        connection.row_factory = dict_factory
         cursor.execute("SELECT * FROM jobs")
         jobs = cursor.fetchall()
         for job in jobs:
