@@ -6,6 +6,8 @@ def dict_factory(cursor: Cursor, row: Row) -> Dict[str, Any]:
     """
     This function is used to convert the sqlite3.Row object to a dictionary.
 
+    Visit https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.row_factory for more information on configuring row factories.
+
     Usage:
         ```python
         connection.row_factory = dict_factory
