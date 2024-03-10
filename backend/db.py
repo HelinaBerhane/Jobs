@@ -2,8 +2,10 @@ import sqlite3
 from contextlib import closing
 from datetime import datetime, timezone
 from uuid import UUID
+from typing import Dict, Any
 
 from backend.exceptions import ResourceNotFoundException
+from backend.util.dict_factory import dict_factory
 from backend.models import Job
 
 
@@ -11,15 +13,11 @@ def read_date(date_str: str) -> datetime:
     return datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S").astimezone(timezone.utc)
 
 
-def read_job(row) -> Job:
-    id = UUID(row[0])
-    name = str(row[1])
-    created_date = read_date(row[9])
-
+def read_job(row: Dict[str, Any]) -> Job:
     return Job(
-        id=id,
-        name=name,
-        created_date=created_date,
+        id=UUID(row.get("id")),
+        name=str(row.get("name")),
+        created_date=read_date(str(row.get("created_date"))),
     )
 
 
@@ -35,8 +33,8 @@ class JobsDB:
 
     def create_jobs_table(self):
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     CREATE TABLE IF NOT EXISTS jobs (
@@ -52,8 +50,8 @@ class JobsDB:
         job: Job,
     ):
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     INSERT INTO jobs(
@@ -74,8 +72,9 @@ class JobsDB:
         self,
     ) -> list[Job]:
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.row_factory = dict_factory
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     SELECT
@@ -95,8 +94,9 @@ class JobsDB:
         job_id: UUID,
     ) -> Job:
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.row_factory = dict_factory
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     SELECT
@@ -127,8 +127,9 @@ class JobsDB:
         job: Job,
     ) -> Job:
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.row_factory = dict_factory
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     UPDATE jobs
@@ -149,18 +150,15 @@ class JobsDB:
                     )
                 connection.commit()
 
-                return Job(
-                    id=row[0],
-                    name=str(row[1]),
-                )
+                return read_job(row)
 
     def delete_job(
         self,
         job_id: UUID,
     ):
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     DELETE FROM jobs 
