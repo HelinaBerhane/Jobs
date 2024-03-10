@@ -1,9 +1,10 @@
 import logging
 from uuid import UUID
 
+from fastapi import APIRouter
+
 from backend.db import jobs_db
 from backend.exceptions import handle_http_exceptions
-from fastapi import APIRouter
 from backend.models import Job
 
 router = APIRouter(

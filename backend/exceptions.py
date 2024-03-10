@@ -1,7 +1,8 @@
-from fastapi import HTTPException
-from functools import wraps
 import sys
 import traceback
+from functools import wraps
+
+from fastapi import HTTPException
 
 
 class ResourceNotFoundException(Exception):

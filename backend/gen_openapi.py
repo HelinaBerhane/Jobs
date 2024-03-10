@@ -1,8 +1,9 @@
 import argparse
 import json
 
-from backend.app import app
 from fastapi.openapi.utils import get_openapi
+
+from backend.app import app
 
 parser = argparse.ArgumentParser(description="Open api spec generator")
 parser.add_argument("out", type=str, help="Location to output openapi json spec.")

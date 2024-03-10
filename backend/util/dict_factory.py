@@ -1,5 +1,5 @@
 from sqlite3 import Cursor, Row
-from typing import Dict, Any
+from typing import Any, Dict
 
 
 def dict_factory(cursor: Cursor, row: Row) -> Dict[str, Any]:

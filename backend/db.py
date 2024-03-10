@@ -1,12 +1,12 @@
 import sqlite3
 from contextlib import closing
 from datetime import datetime, timezone
+from typing import Any, Dict
 from uuid import UUID
-from typing import Dict, Any
 
 from backend.exceptions import ResourceNotFoundException
-from backend.util.dict_factory import dict_factory
 from backend.models import Job
+from backend.util.dict_factory import dict_factory
 
 
 def read_date(date_str: str) -> datetime:
