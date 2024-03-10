@@ -127,6 +127,7 @@ class JobsDB:
         job: Job,
     ) -> Job:
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.row_factory = dict_factory
             connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
                 cursor.execute(
@@ -149,10 +150,7 @@ class JobsDB:
                     )
                 connection.commit()
 
-                return Job(
-                    id=row[0],
-                    name=str(row[1]),
-                )
+                return read_job(row)
 
     def delete_job(
         self,
