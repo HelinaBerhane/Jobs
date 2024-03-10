@@ -33,8 +33,8 @@ class JobsDB:
 
     def create_jobs_table(self):
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     CREATE TABLE IF NOT EXISTS jobs (
@@ -50,8 +50,8 @@ class JobsDB:
         job: Job,
     ):
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     INSERT INTO jobs(
@@ -73,8 +73,8 @@ class JobsDB:
     ) -> list[Job]:
         with closing(sqlite3.connect(self.path)) as connection:
             connection.row_factory = dict_factory
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     SELECT
@@ -95,8 +95,8 @@ class JobsDB:
     ) -> Job:
         with closing(sqlite3.connect(self.path)) as connection:
             connection.row_factory = dict_factory
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     SELECT
@@ -157,8 +157,8 @@ class JobsDB:
         job_id: UUID,
     ):
         with closing(sqlite3.connect(self.path)) as connection:
+            connection.execute("PRAGMA foreign_keys = ON")
             with closing(connection.cursor()) as cursor:
-                connection.execute("PRAGMA foreign_keys = ON")
                 cursor.execute(
                     """
                     DELETE FROM jobs 
