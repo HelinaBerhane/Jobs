@@ -1,6 +1,8 @@
 import sqlite3
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
+
 from backend.util import dict_factory
 
 

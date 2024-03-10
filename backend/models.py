@@ -2,8 +2,9 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID, uuid4
 
-from backend.dates import datetime_now
 from pydantic import BaseModel, Field
+
+from backend.dates import datetime_now
 
 
 class Job(BaseModel):

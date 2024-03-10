@@ -4,7 +4,6 @@ from fastapi.routing import APIRoute
 
 from backend.routers import jobs
 
-
 # App
 app = FastAPI()
 
