@@ -7,47 +7,29 @@ A simple web app for keeping track of job applications
 Tech Stack: Python, FastAPI, React, sqlite3
 
 ## Initial Setup
-
-### Python Env Setup
 ```sh
-make venv
+make setup
 source .venv/bin/activate
-```
-
-### Install Packages
-```sh
-make install
 ```
 
 ## Development
 
-### Cleaning and generating code
+### Clean and generate code
 ```sh
 make clean
 ```
 
-### Running tests
+### Run tests
 ```
 make test
 ```
 
-## Hosting
-### Running the backend server
+## Host the app
+### Run the backend server
 ```sh
-make run
-```
-### Running the frontend server
-```sh
-cd frontend
-npm start
+jobs_api
 ```
 
-## Usage
-
-### Using the web app
-
-[http://localhost:3000/](http://localhost:3000/)
-
-### Using the API
-
+## Use
+### Use the API
 [http://localhost:3000/docs](http://localhost:3000/docs)
