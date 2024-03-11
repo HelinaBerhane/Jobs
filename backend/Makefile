@@ -9,7 +9,7 @@ setup: venv install install_cli
 
 # freeze python requirements
 freeze:
-	.venv/bin/pip freeze > requirements.txt
+	.venv/bin/pip freeze --exclude-editable > requirements.txt
 
 # install python requirements
 install:
