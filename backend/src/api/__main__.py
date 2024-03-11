@@ -1,8 +1,9 @@
-import typer
 import logging
+
+import typer
 import uvicorn
 from typing_extensions import Annotated
-from enum import Enum
+
 from api.app import create_app
 
 cli = typer.Typer(
