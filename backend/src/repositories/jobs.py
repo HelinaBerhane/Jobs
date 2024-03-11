@@ -27,6 +27,7 @@ def deserialize_jobs(rows: list[Record]) -> Job:
     # TODO: consider using map(deserialize_job, rows) when connection.execute returns an iterator instead of a list
     return [deserialize_job(row) for row in rows]
 
+
 # TODO: make sure the logging is the same as the fastAPI logging
 # TODO: look into structured logs
 
@@ -171,7 +172,9 @@ class JobsRepository:
                 if job_ids is None:
                     rows = await db.fetch_all(query)
                 else:
-                    rows = await db.fetch_all(query, {str(i): str(job_ids[i]) for i in range(len(job_ids))})
+                    rows = await db.fetch_all(
+                        query, {str(i): str(job_ids[i]) for i in range(len(job_ids))}
+                    )
                 logging.info(" - rows = %s", rows)
 
                 jobs = deserialize_jobs(rows)

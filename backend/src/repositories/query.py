@@ -1,8 +1,9 @@
-from typing import any
+from typing import Any
 
 
 def format_where_in_list(values: list[Any]) -> str:
-    return {"(" + ",".join(":"+str(i) for i in range(len(values))) + ")"}
+    return {"(" + ",".join(":" + str(i) for i in range(len(values))) + ")"}
+
 
 # class QueryCondition:
 #     def __init__(self) -> None:
