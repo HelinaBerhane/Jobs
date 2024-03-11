@@ -5,3 +5,4 @@ openapi.json
 backend/jobs.db
 events.log
 api-client
+backend_old
