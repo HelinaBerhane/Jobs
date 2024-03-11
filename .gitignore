@@ -6,3 +6,4 @@ backend/jobs.db
 events.log
 api-client
 backend_old
+db.sqlite3

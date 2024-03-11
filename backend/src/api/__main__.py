@@ -1,10 +1,12 @@
+import asyncio
 import logging
 
 import typer
 import uvicorn
-from typing_extensions import Annotated
-
 from api.app import create_app
+from databases import Database
+from repositories.jobs import JobsRepository
+from typing_extensions import Annotated
 
 cli = typer.Typer(
     add_completion=False,
@@ -12,7 +14,7 @@ cli = typer.Typer(
 
 
 @cli.command()
-def main(
+def serve(
     host: Annotated[
         str,
         typer.Option(help="Host to run the server on", envvar="HOST"),
@@ -21,7 +23,16 @@ def main(
         int,
         typer.Option(help="Port to run the server on", envvar="PORT"),
     ] = 8000,
+    database_url: Annotated[
+        str,
+        typer.Option(help="Database URL", envvar="DATABASE_URL"),
+    ] = "sqlite+aiosqlite:///db.sqlite3",
 ):
+    """
+    Run the jobs api server.
+    """
+    database = Database(database_url)
+
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s %(message)s",
@@ -32,7 +43,7 @@ def main(
     )
 
     config = uvicorn.Config(
-        create_app(),
+        create_app(database),
         host=host,
         port=port,
         log_level="info",
@@ -40,6 +51,33 @@ def main(
 
     server = uvicorn.Server(config)
     server.run()
+
+
+async def run_migrations(database: Database):
+    """
+    Run the database migrations.
+
+    Args:
+        database (Database): The database instance.
+    """
+    jobs_repository = JobsRepository(database)
+    print("Creating jobs table...")
+    await jobs_repository.create_table()
+    print("done")
+
+
+@cli.command()
+def migrate(
+    database_url: Annotated[
+        str,
+        typer.Option(help="Database URL", envvar="DATABASE_URL"),
+    ] = "sqlite+aiosqlite:///db.sqlite3",
+):
+    """
+    Run the database migrations.
+    """
+
+    asyncio.run(run_migrations(Database(database_url)))
 
 
 if __name__ == "__main__":
