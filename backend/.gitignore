@@ -1,2 +1,4 @@
 .venv
 *.egg-info
+events.log
+.ruff_cache
