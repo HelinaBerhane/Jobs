@@ -4,7 +4,7 @@ from uuid import UUID
 from fastapi import HTTPException, Query
 from fastapi.routing import APIRouter
 from models import Job
-from example_repo.jobs import JobsRepository
+from repositories.jobs import JobsRepository
 
 from api.db import DatabaseDep
 

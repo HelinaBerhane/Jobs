@@ -1,8 +1,7 @@
 from databases import Database
 from databases.interfaces import Record
-from example_repo.qb import compile_sql, Parameter
 from models import Job
-from uuid import uuid4, UUID
+from uuid import UUID
 from datetime import datetime, timezone
 from typing import Optional, List
 
