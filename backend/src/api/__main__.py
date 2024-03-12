@@ -3,10 +3,11 @@ import logging
 
 import typer
 import uvicorn
-from api.app import create_app
 from databases import Database
 from repositories.jobs import JobsRepository
 from typing_extensions import Annotated
+
+from api.app import create_app
 
 cli = typer.Typer(
     add_completion=False,

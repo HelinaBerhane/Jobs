@@ -42,8 +42,7 @@ async def get_job(
     jobs_repository = JobsRepository(database)
     job = await jobs_repository.read_one(job_id)
     if not job:
-        raise HTTPException(
-            status_code=404, detail=f"Job id={job_id} not found")
+        raise HTTPException(status_code=404, detail=f"Job id={job_id} not found")
     return job
 
 
