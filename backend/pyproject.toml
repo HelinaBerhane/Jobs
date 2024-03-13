@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["Luke Harris <6074660+luk707@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+typer = "^0.9.0"
+rich = "^13.7.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poe.tasks]
+test = "pytest"
+dev.script = "api.main:app"
