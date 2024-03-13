@@ -8,6 +8,10 @@ authors = ["Luke Harris <6074660+luk707@users.noreply.github.com>"]
 python = "^3.9"
 typer = "^0.9.0"
 rich = "^13.7.1"
+databases = "^0.9.0"
+fastapi = "^0.110.0"
+uvicorn = "^0.28.0"
+aiosqlite = "^0.20.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
