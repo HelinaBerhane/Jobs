@@ -22,4 +22,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks]
 test = "pytest"
-dev.script = "api.main:app"
+dev.script = "cli:app"
