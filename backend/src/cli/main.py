@@ -1,10 +1,10 @@
+import logging
+
 import typer
 import uvicorn
-import logging
+from api.server import create_server
 from databases import Database
 from typing_extensions import Annotated
-
-from api.server import create_server
 
 app = typer.Typer()
 

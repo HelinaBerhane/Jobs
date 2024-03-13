@@ -7,7 +7,6 @@ from pydantic import BaseModel, Field
 
 class Job(BaseModel):
     id: UUID = Field(default_factory=uuid4)
-    created_date: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc))
+    created_date: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     name: Optional[str]

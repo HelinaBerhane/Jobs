@@ -1,6 +1,7 @@
+from typing import Optional
+
 from databases import Database
 from fastapi import Depends
-from typing import Optional
 from typing_extensions import Annotated
 
 db: Optional[Database] = None

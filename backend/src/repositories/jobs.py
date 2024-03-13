@@ -10,7 +10,7 @@ from models import Job
 def parse_job(row: Record) -> Job:
     created_date = datetime.fromisoformat(row["created_date"])
     created_date = created_date.replace(tzinfo=timezone.utc)
-    return Job(id=UUID(row.id), created_date=created_date, name=row.name)
+    return Job(id=UUID(row["id"]), created_date=created_date, name=row["name"])
 
 
 class JobsRepository:
