@@ -15,4 +15,4 @@ RUN poetry install --no-root --no-dev --no-interaction --no-ansi
 COPY . .
 
 ENV PYTHONPATH=/app/src
-CMD ["poetry", "run", "python", "-m", "cli.main", "serve"]
+CMD ["poetry", "run", "python", "-m", "cli.main"]
