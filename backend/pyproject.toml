@@ -30,3 +30,4 @@ lint_fix = "ruff check --fix"
 type_check = "mypy src"
 pretty = ["format", "lint_fix", "type_check"]
 run.script = "cli.main:app"
+dbmate = "dbmate --no-dump-schema -u sqlite:db.sqlite3 -d src/repositories/migrations"
