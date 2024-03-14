@@ -1,53 +1,115 @@
-# Jobs
-
-## Description
-
+# Jobs App
 A simple web app for keeping track of job applications
 
-Tech Stack: Python, FastAPI, React, sqlite3
 
-## Initial Setup
+## Backend API
+>**N.B. All commands for working with the backend API should be done within the backend directory in the root of the repository.**
 
-### Python Env Setup
-```sh
-make venv
-source .venv/bin/activate
+### Setup 
+
+#### Prequisites
+- PyEnv ((github)[https://github.com/pyenv/pyenv])
+    ```
+    brew install pyenv
+    ```
+- Python >= 3.9.18 ([website](https://www.python.org/))
+- pipx ([github](https://github.com/pypa/pipx))
+    ```
+    brew install pipx
+    pipx ensurepath
+    ```
+- Poe >= 0.25.0 ([github](https://github.com/nat-n/poethepoet))
+    ```
+    pipx install poethepoet
+    ```
+- Poetry  >= 1.1.14 ([website](https://python-poetry.org/))
+    ```
+    pipx install poetry
+    ```
+- DBMate >= 2.6.0 ([DBMate](https://github.com/amacneil/dbmate))
+    ```
+    brew install dbmate
+    ```
+
+#### Setup Python Environment
+```
+pyenv install 3.9.18
+pyenv local 3.9.18
 ```
 
-### Install Packages
-```sh
-make install
+#### Select Python Interpreter in VSCode
+```
+poetry shell
+```
+copy the output from `/Users/...` to `.../virtualenvs/backend-21K18sx5-py3.12` to your VSCode python interpreter
+```
+cmd p
+>Python: Select Interpreter
 ```
 
-## Development
-
-### Cleaning and generating code
-```sh
-make clean
+#### Install Dependencies
+```
+poetry install
 ```
 
-### Running tests
+#### Run Database Migrations
 ```
-make test
-```
-
-## Hosting
-### Running the backend server
-```sh
-make run
-```
-### Running the frontend server
-```sh
-cd frontend
-npm start
+poe dbmate up
 ```
 
-## Usage
+### Development
 
-### Using the web app
+#### Format the code
+```
+poe format
+```
 
-[http://localhost:3000/](http://localhost:3000/)
+#### Lint the code
+```
+poe lint
+```
 
-### Using the API
+#### Fix simple linting issues
+```
+poe lint_fix
+```
 
-[http://localhost:3000/docs](http://localhost:3000/docs)
+#### Check the types in the code
+```
+poe type_check
+```
+
+#### Run all formatting, lint type checking fixes
+```
+poe pretty
+```
+
+#### Make a database migration
+```
+poe dbmate new [MIGRATION_NAME]
+```
+
+#### Add a new Dependency
+```
+poetry add <dependency-name>
+```
+
+### Use
+
+#### Use a production version
+
+##### Build the docker container locally
+```
+docker build .
+```
+
+#### Use a local test version
+
+##### Run the API
+```
+poe run
+```
+
+##### Use the API
+
+[http://localhost:8000/docs](http://localhost:8000/docs)
