@@ -1,5 +1,5 @@
-from api.routers.hello import router as hello_router
+from api.routers.jobs import router as jobs_router
 
 __all__ = [
-    "hello_router",
+    "jobs_router",
 ]

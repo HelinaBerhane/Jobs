@@ -2,7 +2,7 @@ from databases import Database
 from fastapi import FastAPI
 
 from api.db import init_db
-from api.routers import hello_router
+from api.routers import jobs_router
 
 
 def create_server(database: Database) -> FastAPI:
@@ -19,6 +19,6 @@ def create_server(database: Database) -> FastAPI:
 
     app = FastAPI()
 
-    app.include_router(hello_router)
+    app.include_router(jobs_router)
 
     return app
