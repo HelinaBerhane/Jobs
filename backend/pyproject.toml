@@ -2,7 +2,10 @@
 name = "backend"
 version = "0.1.0"
 description = ""
-authors = ["Luke Harris <6074660+luk707@users.noreply.github.com>"]
+authors = [
+    "Helina Berhane <helina.berhane@outlook.com>",
+    "Luke Harris <6074660+luk707@users.noreply.github.com>",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"

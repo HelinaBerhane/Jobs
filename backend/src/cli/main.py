@@ -1,4 +1,3 @@
-import asyncio
 import logging
 
 import typer
@@ -25,6 +24,7 @@ def serve(
         typer.Option(help="Database URL", envvar="DATABASE_URL"),
     ] = "sqlite+aiosqlite:///db.sqlite3",
 ):
+    # TODO: consider moving the log level to a command line argument
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s %(message)s",
@@ -38,7 +38,11 @@ def serve(
 
     server = create_server(database)
 
-    uvicorn.run(server, host=host, port=port)
+    uvicorn.run(
+        server,
+        host=host,
+        port=port,
+    )
 
 
 if __name__ == "__main__":

@@ -1,90 +1,115 @@
 # Jobs App
-
 A simple web app for keeping track of job applications
 
-## Development
 
-### Backend
+## Backend API
+>**N.B. All commands for working with the backend API should be done within the backend directory in the root of the repository.**
 
-All commands for working with the backend project should be done within the backend directory found in the root of the repository.
+### Setup 
 
 #### Prequisites
+- PyEnv ((github)[https://github.com/pyenv/pyenv])
+    ```
+    brew install pyenv
+    ```
+- Python >= 3.9.18 ([website](https://www.python.org/))
+- pipx ([github](https://github.com/pypa/pipx))
+    ```
+    brew install pipx
+    pipx ensurepath
+    ```
+- Poe >= 0.25.0 ([github](https://github.com/nat-n/poethepoet))
+    ```
+    pipx install poethepoet
+    ```
+- Poetry  >= 1.1.14 ([website](https://python-poetry.org/))
+    ```
+    pipx install poetry
+    ```
+- DBMate >= 2.6.0 ([DBMate](https://github.com/amacneil/dbmate))
+    ```
+    brew install dbmate
+    ```
 
-You must have the following installed on your system:
+#### Setup Python Environment
+```
+pyenv install 3.9.18
+pyenv local 3.9.18
+```
 
-- [Python](https://www.python.org/) >= 3.9.18
-- [Poetry](https://python-poetry.org/) >= 1.1.14
-  > Reccomend installing poetry with [pipx](https://github.com/pypa/pipx) `pipx install poetry`
-- [Poe](https://github.com/nat-n/poethepoet) >= 0.25.0
-  > Reccomend installing with [pipx](https://github.com/pypa/pipx): `pipx install poethepoet`
-- [DBMate](https://github.com/amacneil/dbmate) >= 2.6.0
+#### Select Python Interpreter in VSCode
+```
+poetry shell
+```
+copy the output from `/Users/...` to `.../virtualenvs/backend-21K18sx5-py3.12` to your VSCode python interpreter
+```
+cmd p
+>Python: Select Interpreter
+```
 
-#### Installing required development and runtime dependencies
-
+#### Install Dependencies
 ```
 poetry install
 ```
 
-#### Run database migrations
-
+#### Run Database Migrations
 ```
 poe dbmate up
 ```
 
-#### Running the application
+### Development
 
-```
-poe run [--help]
-```
-
-#### Linting & Formatting
-
-To format the code:
-
+#### Format the code
 ```
 poe format
 ```
 
-To lint the code:
-
+#### Lint the code
 ```
 poe lint
 ```
 
-To fix simple linting issues in the code:
-
+#### Fix simple linting issues
 ```
 poe lint_fix
 ```
 
-All formatting, lint fixing and type checking targets can also be run with one command
-
-```
-poe pretty
-```
-
-#### Testing
-
-```
-poe test
-```
-
-#### Type checking
-
+#### Check the types in the code
 ```
 poe type_check
 ```
 
-#### Making a migration
+#### Run all formatting, lint type checking fixes
+```
+poe pretty
+```
 
+#### Make a database migration
 ```
 poe dbmate new [MIGRATION_NAME]
 ```
 
-#### Building the docker container
+#### Add a new Dependency
+```
+poetry add <dependency-name>
+```
 
-The following command will build the docker container for the application locally.
+### Use
 
+#### Use a production version
+
+##### Build the docker container locally
 ```
 docker build .
 ```
+
+#### Use a local test version
+
+##### Run the API
+```
+poe run
+```
+
+##### Use the API
+
+[http://localhost:8000/docs](http://localhost:8000/docs)
