@@ -44,7 +44,7 @@ class JobsRepository:
                 rows = await db.fetch_all(query)
         return [parse_job(row) for row in rows]
 
-    async def update_partial(self, job: Job) -> Optional[Job]:
+    async def update_partial(self, job: Job) -> Job:
         update_fields = ", ".join(
             [f"{key} = :{key}" for key in job.model_dump(exclude={"id"})]
         )

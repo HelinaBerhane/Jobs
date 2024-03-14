@@ -15,8 +15,8 @@ router = APIRouter(
 
 @router.post("/")
 async def create_job(
+    database: DatabaseDep,
     job: Job,
-    database: DatabaseDep = DatabaseDep,
 ) -> Job:
     jobs_repository = JobsRepository(database)
     return await jobs_repository.create(job)
@@ -24,8 +24,8 @@ async def create_job(
 
 @router.get("/")
 async def get_jobs(
+    database: DatabaseDep,
     job_ids: Annotated[Optional[list[UUID]], Query()] = None,
-    database: DatabaseDep = DatabaseDep,
 ) -> list[Job]:
     jobs_repository = JobsRepository(database)
     if job_ids:
@@ -36,8 +36,8 @@ async def get_jobs(
 
 @router.get("/{job_id}")
 async def get_job(
+    database: DatabaseDep,
     job_id: UUID,
-    database: DatabaseDep = DatabaseDep,
 ) -> Job:
     jobs_repository = JobsRepository(database)
     job = await jobs_repository.read_one(job_id)
@@ -49,8 +49,8 @@ async def get_job(
 
 @router.delete("/{job_id}")
 async def delete_job(
+    database: DatabaseDep,
     job_id: UUID,
-    database: DatabaseDep = DatabaseDep,
 ) -> None:
     jobs_repository = JobsRepository(database)
     await jobs_repository.delete(job_id)
@@ -59,8 +59,8 @@ async def delete_job(
 
 @router.patch("/")
 async def update_job(
+    database: DatabaseDep,
     job: Job,
-    database: DatabaseDep = DatabaseDep,
 ) -> Job:
     jobs_repository = JobsRepository(database)
     return await jobs_repository.update_partial(job)

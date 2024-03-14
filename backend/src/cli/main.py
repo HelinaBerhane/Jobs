@@ -1,5 +1,6 @@
-import logging
 import asyncio
+import logging
+
 import typer
 import uvicorn
 from api.server import create_server
