@@ -13,7 +13,7 @@ env:
 # There is a single job in this workflow. It's configured to run on the jobs-app-arc-runner-set ARC in the production cluster.
 jobs:
   build-and-push-image:
-    runs-on: jobs-app-arc-runner-set
+    runs-on: jobs-app-dind
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
       contents: read
