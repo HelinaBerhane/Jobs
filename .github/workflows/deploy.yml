@@ -14,18 +14,17 @@ jobs:
         id: get_tag
         uses: actions/github-script@v5
         with:
+          result-encoding: string
           script: |
             const response = await github.repos.getLatestRelease({
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            console.log(response.data.tag_name);
-        outputs:
-          tag_name: ${{ steps.get_tag.outputs.tag_name }}
+            return response.data.tag_name;
 
       # Echo the tag name
       - name: Echo tag name
-        run: echo ${{ steps.get_tag.outputs.tag_name }}
+        run: echo ${{ steps.get_tag.outputs.result }}
 
       # - name: Set up kubectl
       #   uses: azure/setup-kubectl@v1
