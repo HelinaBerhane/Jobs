@@ -1,0 +1,37 @@
+name: Deploy to Kubernetes
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: jobs-app-arc-runner-set
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get Latest Release Tag
+        id: get_tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const response = await github.repos.getLatestRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            console.log(response.data.tag_name);
+          outputs:
+            tag_name: ${{ steps.get_tag.outputs.tag_name }}
+
+      # Echo the tag name
+      - name: Echo tag name
+        run: echo ${{ steps.get_tag.outputs.tag_name }}
+
+      # - name: Set up kubectl
+      #   uses: azure/setup-kubectl@v1
+      #   with:
+      #     version: "1.27.4"
+
+      # - name: Deploy to Kubernetes
+      #   run: |
+      #     kubectl apply -f path/to/your/kubernetes/manifests
