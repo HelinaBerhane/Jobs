@@ -1,36 +1,171 @@
+# Summary: This workflow is triggered manually and deploys the application to a Kubernetes cluster.
+
+# Steps:
+# 1. Run backend tests
+# 2. Build and push Docker image
+# 3. Enable maintenance mode
+# 4. Run migrations
+# 5. Deploy to Kubernetes
+# 6. Disable maintenance mode
+# 7. Notify deployment status
+
+# It should rollback the migration and maintenance mode if the deployment fails.
+
 name: Deploy to Kubernetes
 
 on:
   workflow_dispatch:
+    inputs:
+      logLevel:
+        description: "Environment"
+        required: true
+        default: staging
+        type: choice
+        options:
+          - production
+          - staging
+
+env:
+  REGISTRY: ghcr.io
+  BACKEND_IMAGE: ${{ github.repository }}-backend
 
 jobs:
-  deploy:
+  backend-tests:
     runs-on: jobs-app-arc-runner-set
+
+    permissions:
+      contents: read
+
+    actions:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # TODO: Add the actual backend tests here
+      - name: Run backend tests
+        run: |
+          echo "Running backend tests"
+          sleep 5
+          echo "Backend tests passed"
+
+  build-backend-image:
+    needs: backend-tests
+    runs-on: jobs-app-dind
+
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Get Latest Release Tag
-        id: get_tag
-        uses: actions/github-script@v5
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
         with:
-          result-encoding: string
-          script: |
-            const response = await github.repos.getLatestRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
-            return response.data.tag_name;
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Echo the tag name
-      - name: Echo tag name
-        run: echo ${{ steps.get_tag.outputs.result }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE }}
+          tags: |
+            type=sha
 
-      # - name: Set up kubectl
-      #   uses: azure/setup-kubectl@v1
-      #   with:
-      #     version: "1.27.4"
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
-      # - name: Deploy to Kubernetes
-      #   run: |
-      #     kubectl apply -f path/to/your/kubernetes/manifests
+  enable-maintenance-mode:
+    needs: build-backend-image
+    runs-on: jobs-app-arc-runner-set
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Enable maintenance mode
+        run: |
+          echo "Enabling maintenance mode"
+          sleep 5
+          echo "Maintenance mode enabled"
+
+  run-migrations:
+    needs: enable-maintenance-mode
+    runs-on: jobs-app-arc-runner-set
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # TODO: Add the actual migration steps here
+      - name: Run migrations
+        run: |
+          echo "Running migrations"
+          sleep 5
+          echo "Migrations ran successfully"
+
+  deploy-to-kubernetes:
+    needs: run-migrations
+    runs-on: jobs-app-arc-runner-set
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Kubernetes
+        run: |
+          echo "Deploying to Kubernetes"
+          sleep 5
+          echo "Deployment successful"
+
+  disable-maintenance-mode:
+    needs: deploy-to-kubernetes
+    runs-on: jobs-app-arc-runner-set
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Disable maintenance mode
+        run: |
+          echo "Disabling maintenance mode"
+          sleep 5
+          echo "Maintenance mode disabled"
+
+  notify-deployment-status:
+    needs: disable-maintenance-mode
+    runs-on: jobs-app-arc-runner-set
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Notify deployment status
+        run: |
+          echo "Notifying deployment status"
+          sleep 5
+          echo "Deployment status notified"
