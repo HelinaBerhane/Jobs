@@ -1,6 +1,7 @@
 name: Create and publish the backend image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "master"
@@ -52,3 +53,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Echo the tag name
+        run: echo ${{ steps.meta.outputs.tags }}
