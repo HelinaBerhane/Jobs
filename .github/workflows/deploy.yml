@@ -1,3 +1,5 @@
+name: Deploy to Kubernetes
+
 # Summary: This workflow is triggered manually and deploys the application to a Kubernetes cluster.
 
 # Steps:
@@ -10,8 +12,6 @@
 # 7. Notify deployment status
 
 # It should rollback the migration and maintenance mode if the deployment fails.
-
-name: Deploy to Kubernetes
 
 on:
   workflow_dispatch:
