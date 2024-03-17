@@ -113,3 +113,26 @@ poe run
 ##### Use the API
 
 [http://localhost:8000/docs](http://localhost:8000/docs)
+
+## Frontend Web App
+
+>**N.B. All commands for working with the frontend web app should be done within the frontend directory in the root of the repository.**
+
+This app was created using [`@capacitor/create-app`](https://github.com/ionic-team/create-capacitor-app),
+and comes with a very minimal shell for building an app.
+
+### Setup 
+#### Install Dependencies
+```
+npm install
+```
+
+### Usage
+
+#### Run the Web App
+```
+npm start
+```
+
+##### Use the API
+[http://localhost:3000](http://localhost:3000)
