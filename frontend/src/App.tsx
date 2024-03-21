@@ -1,12 +1,15 @@
 import React from "react";
-
-import "@mantine/core/styles.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
 import { theme } from "./theme";
+import { urls } from "./urls";
 
 import "@mantine/core/styles.css";
+
+const router = createBrowserRouter(urls);
+
 
 export default function App() {
   return (
@@ -20,7 +23,7 @@ export default function App() {
         defaultColorScheme="auto"
         theme={theme}
       >
-        <h1>Hello World</h1>
+        <RouterProvider router={router} />
       </MantineProvider>
     </>
   );
