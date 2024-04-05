@@ -84,6 +84,11 @@ poe type_check
 poe pretty
 ```
 
+### Generating OpenAPI schemas
+```sh
+poe run generate-openapi
+```
+
 #### Make a database migration
 ```
 poe dbmate new [MIGRATION_NAME]
@@ -107,7 +112,7 @@ docker build .
 
 ##### Run the API
 ```
-poe run
+poe run serve
 ```
 
 ##### Use the API
