@@ -17,6 +17,7 @@
     "@capacitor/core": "latest",
     "@capacitor/splash-screen": "latest",
     "@mantine/core": "^7.6.2",
+    "jobs-api-client": "file:../api-client",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3"

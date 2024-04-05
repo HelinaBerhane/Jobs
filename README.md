@@ -84,9 +84,17 @@ poe type_check
 poe pretty
 ```
 
-### Generating OpenAPI schemas
+#### Generating OpenAPI schemas
+First time
 ```sh
-poe run generate-openapi
+cd ../backend; poe openapi
+cd ../api-client; npm install
+cd ../frontend; npm install ../api-client
+```
+Second time onwards
+```sh
+cd ../backend; poe openapi
+cd ../frontend; npm install ../api-client
 ```
 
 #### Make a database migration
