@@ -1,10 +1,11 @@
 import React from "react";
+
+import { SafeArea } from "capacitor-plugin-safe-area";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { NavigationProgress } from "@mantine/nprogress";
-import { SafeArea } from "capacitor-plugin-safe-area";
 
 import { theme } from "./theme";
 import { urls } from "./urls";
@@ -22,7 +23,6 @@ SafeArea.getSafeAreaInsets().then(({ insets }) => {
 });
 
 const router = createBrowserRouter(urls);
-
 
 export default function App() {
   return (

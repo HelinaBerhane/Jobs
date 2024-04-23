@@ -1,4 +1,5 @@
 import React from "react";
+
 import { RouteObject, redirect } from "react-router-dom";
 
 import AppLayout from "./AppLayout";

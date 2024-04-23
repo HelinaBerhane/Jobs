@@ -1,12 +1,8 @@
 import React from "react";
 
-import {
-  Button,
-  Group,
-  Stack,
-  TextInput,
-} from "@mantine/core";
+import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
+
 import { Job } from "api-client";
 
 interface NewJobFormProps {

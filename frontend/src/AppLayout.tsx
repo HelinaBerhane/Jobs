@@ -1,4 +1,5 @@
 import React, { ReactNode, createContext, useState } from "react";
+
 import { Outlet } from "react-router-dom";
 
 import {
@@ -14,10 +15,9 @@ import {
   em,
 } from "@mantine/core";
 
+import styles from "./AppLayout.module.css";
 import { TabBar } from "./components/TabBar";
 import { useMobileBreakpoint } from "./useMobileBreakpoint";
-
-import styles from "./AppLayout.module.css";
 
 interface NoAction {
   type: "none";

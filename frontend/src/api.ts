@@ -1,4 +1,4 @@
-import { Configuration, DefaultApi } from "jobs-api-client";
+import { Configuration, DefaultApi } from "api-client";
 
 export const jobsApi = new DefaultApi(
   new Configuration({

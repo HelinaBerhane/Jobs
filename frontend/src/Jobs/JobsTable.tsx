@@ -1,9 +1,7 @@
 import React from "react";
 
-import {
-  Button,
-  Table,
-} from "@mantine/core";
+import { Button, Table } from "@mantine/core";
+
 import { Job } from "api-client";
 
 export interface JobsTableProps {
