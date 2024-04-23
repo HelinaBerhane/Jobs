@@ -3,6 +3,7 @@ from api.routers import jobs_router
 from databases import Database
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def use_route_names_as_operation_ids(app: FastAPI):
@@ -24,6 +25,14 @@ def create_server(database: Database) -> FastAPI:
     init_db(database)
 
     app = FastAPI()
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],  # TODO: Configurable
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     app.include_router(jobs_router)
 
