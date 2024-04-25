@@ -113,7 +113,12 @@ class JobsRepository:
         self,
         job: Job,
     ) -> Job:
-        update_fields = ", ".join([f"{key} = :{key}" for key in job.model_dump(exclude={"id", "created_date"})])
+        update_fields = ", ".join(
+            [
+                f"{key} = :{key}"
+                for key in job.model_dump(exclude={"id", "created_date"})
+            ]
+        )
         query = f"""
             UPDATE jobs
             SET

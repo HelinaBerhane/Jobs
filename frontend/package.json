@@ -1,0 +1,38 @@
+{
+  "name": "capacitor-app",
+  "version": "1.0.0",
+  "description": "An Amazing Capacitor App",
+  "main": "index.js",
+  "keywords": [
+    "capacitor",
+    "mobile"
+  ],
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@capacitor/camera": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/splash-screen": "latest",
+    "@mantine/core": "^7.6.2",
+    "@mantine/form": "^7.8.0",
+    "@mantine/hooks": "^7.8.1",
+    "@mantine/notifications": "^7.8.1",
+    "@mantine/nprogress": "^7.8.1",
+    "api-client": "file:../api-client",
+    "capacitor-plugin-safe-area": "^3.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "latest",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "vite": "^2.9.13"
+  },
+  "author": "",
+  "license": "ISC"
+}

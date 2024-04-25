@@ -34,3 +34,6 @@ type_check = "mypy src"
 pretty = ["format", "lint_fix", "type_check"]
 run.script = "cli.main:app"
 dbmate = "dbmate --no-dump-schema -u sqlite:db.sqlite3 -d src/repositories/migrations"
+openapi_generate_schema = "poe run generate-openapi"
+openapi_generate_typescript_client = "openapi-generator generate -i ./openapi.json -g typescript-fetch -o .././api-client"
+openapi = ["openapi_generate_schema", "openapi_generate_typescript_client"]
